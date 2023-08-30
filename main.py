@@ -13,7 +13,8 @@ from flask import Flask, jsonify, request, abort
 
 
 JWT_SECRET = os.environ.get('JWT_SECRET', 'abc123abc1234')
-LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
+LOG_LEVEL = 'DEBUG'
+
 
 
 def _logger():
@@ -61,6 +62,11 @@ def require_jwt(function):
 def health():
     return jsonify("Healthy")
 
+@APP.route('/howdy', methods=['GET'])
+def howdy():
+    return jsonify({
+        'howdy': 'howdy'
+    })
 
 @APP.route('/auth', methods=['POST'])
 def auth():
@@ -110,6 +116,52 @@ def _get_jwt(user_data):
                'nbf': datetime.datetime.utcnow(),
                'email': user_data['email']}
     return jwt.encode(payload, JWT_SECRET, algorithm='HS256')
+
+@APP.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False,
+        "error": 400,
+        "message": "BAD REQUEST"
+    }), 400
+
+
+@APP.errorhandler(401)
+def unauthorized(error):
+    return jsonify({
+        "success": False,
+        "error": 401,
+        "message": "UNAUTHORIZED"
+    }), 401
+
+
+@APP.errorhandler(403)
+def forbidden(error):
+    return jsonify({
+        "success": False,
+        "error": 403,
+        "message": "FORBIDDEN"
+    }), 403
+
+
+@APP.errorhandler(405)
+def method_not_allowed(error):
+    return jsonify({
+        "success": False,
+        "error": 405,
+        "message": "METHOD NOT ALLOWED"
+    }), 403
+
+
+@APP.errorhandler(500)
+def server_error(error):
+    return jsonify({
+        "success": False,
+        "error": 500,
+        "message": "INTERNAL SERVER ERROR"
+    }), 500
+
+
 
 if __name__ == '__main__':
     APP.run(host='127.0.0.1', port=8080, debug=True)

@@ -19,3 +19,20 @@ metadata:
   namespace: kube-system
   resourceVersion: "1631"
   uid: 86402a4e-a9ff-4721-8c24-f0c4258f7440
+
+
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: aws-auth
+#   namespace: kube-system
+# data:
+#   mapRoles: |
+#     - rolearn: arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_EKS_ROLE
+#       username: eks-user
+#       groups:
+#         - system:masters
+
+
+
