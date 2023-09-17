@@ -1,28 +1,13 @@
 {
-    "Version": "2012-10-17",
-    "Statement":[{
-        "Effect": "Allow",
-        "Action": ["eks:Describe*", "ssm:GetParameters"],
-        "Resource":"*"
-    }]
+ "Version": "2012-10-17",
+ "Statement": [
+     {
+         "Effect": "Allow",
+         "Action": [
+             "eks:Describe*",
+             "ssm:GetParameters"
+         ],
+         "Resource": "*"
+     }
+ ]
 }
-
-
-// {
-//   "Version": "2012-10-17",
-//   "Statement": [
-//     {
-//       "Effect": "Allow",
-//       "Action": [
-//         "eks:DescribeCluster",
-//         "eks:ListClusters",
-//         "eks:CreateOrUpdateNodegroup",
-//         "ecr:GetDownloadUrlForLayer",
-//         "ecr:BatchGetImage",
-//         "ecr:BatchCheckLayerAvailability",
-//         "ecr:PutImage"
-//       ],
-//       "Resource": "*"
-//     }
-//   ]
-// }
